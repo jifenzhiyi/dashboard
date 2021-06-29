@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import getCirlPoint from '@/utils/index.js';
-
-// let angle = 0;
+import config from '@/mixins/config.js';
+import { getCirlPoint } from '@/utils/index.js';
 
 export default {
   name: 'Custom',
+  mixins: [config],
   props: ['value', 'color'],
   data() {
     return {
@@ -42,7 +42,6 @@ export default {
       }, 1000);
     },
     init() {
-      // angle += 1;
       const self = this;
       this.option = {
         backgroundColor: '#061740',
@@ -53,13 +52,9 @@ export default {
           textStyle: {
             rich: {
               a: {
-                fontSize: 20,
+                fontSize: '22px',
                 color: self.color,
               },
-              // c: {
-              //   fontSize: 14,
-              //   color: '#ffffff',
-              // },
             },
           },
         },
@@ -80,14 +75,13 @@ export default {
               style: {
                 stroke: self.color,
                 fill: 'transparent',
-                lineWidth: 1,
+                lineWidth: 1.5,
               },
               silent: true,
             };
           },
           data: [0],
         }, {
-          name: 'ring5',
           type: 'custom',
           coordinateSystem: 'none',
           renderItem(params, api) {
@@ -103,14 +97,13 @@ export default {
               style: {
                 stroke: self.color,
                 fill: 'transparent',
-                lineWidth: 1,
+                lineWidth: 1.5,
               },
               silent: true,
             };
           },
           data: [0],
         }, {
-          name: 'ring5',
           type: 'custom',
           coordinateSystem: 'none',
           renderItem(params, api) {
@@ -126,14 +119,13 @@ export default {
               style: {
                 stroke: self.color,
                 fill: 'transparent',
-                lineWidth: 1,
+                lineWidth: 1.5,
               },
               silent: true,
             };
           },
           data: [0],
         }, {
-          name: 'ring5',
           type: 'custom',
           coordinateSystem: 'none',
           renderItem(params, api) {
@@ -149,14 +141,13 @@ export default {
               style: {
                 stroke: self.color,
                 fill: 'transparent',
-                lineWidth: 1,
+                lineWidth: 1.5,
               },
               silent: true,
             };
           },
           data: [0],
         }, {
-          name: 'ring5',
           type: 'custom',
           coordinateSystem: 'none',
           renderItem(params, api) {
@@ -180,7 +171,6 @@ export default {
           },
           data: [0],
         }, {
-          name: 'ring5', // 绿点
           type: 'custom',
           coordinateSystem: 'none',
           renderItem(params, api) {
@@ -204,12 +194,11 @@ export default {
           },
           data: [0],
         }, {
-          name: '吃猪肉频率',
           type: 'pie',
-          radius: ['54%', '42%'],
+          radius: ['53%', '30%'],
           silent: true,
           clockwise: true,
-          startAngle: 90,
+          startAngle: 80,
           z: 0,
           zlevel: 0,
           label: {
@@ -253,7 +242,7 @@ export default {
         }, {
           name: '',
           type: 'gauge',
-          radius: '77%',
+          radius: '64%',
           center: ['50%', '50%'],
           startAngle: 0,
           endAngle: 360,

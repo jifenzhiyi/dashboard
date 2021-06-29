@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
-    <h1>首页</h1>
+  <div
+    ref="store"
+    class="home">
     <p>这里是一个新的页面</p>
     <div class="Test">
       <custom
@@ -24,6 +25,7 @@
 import Custom from 'comps/Custom';
 import DefMap from 'comps/Map';
 import DefBar from 'comps/Bar';
+import { displayApp } from '@/utils/index.js';
 
 export default {
   name: 'Home',
@@ -31,6 +33,11 @@ export default {
     Custom,
     DefMap,
     DefBar,
+  },
+  mounted() {
+    this.$refs.store.ondblclick = () => {
+      displayApp.isFullScreen() ? displayApp.exitFullScreen() : displayApp.fullScreen();
+    };
   },
 };
 </script>

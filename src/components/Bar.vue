@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import config from '@/mixins/config.js';
+
 const xData = ['饼干\n薯片', '蜜饯\n糖巧', '面包\n糕点', '泡面\n素食', '豆肉\n熟食', '果冻\n罐头', '礼盒', '品肆\n名酒', '果汁\n饮料', '牛奶\n乳饮'];
 const data1 = [700, 500, 200, 220, 240, 90, 260, 250, 400, 380];
 const data2 = [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000];
@@ -20,11 +22,6 @@ const option = {
   },
   backgroundColor: '#181F4E',
   color: ['#1da6ed'],
-  tooltip: {
-    formatter(a) {
-      return `${a.name.replace('\n', '')}:${a.data}`;
-    },
-  },
   grid: {
     left: '5%',
     right: '5%',
@@ -142,6 +139,7 @@ const option = {
 
 export default {
   name: 'Bar',
+  mixins: [config],
   data() {
     return {
       option,

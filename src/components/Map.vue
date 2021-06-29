@@ -5,10 +5,12 @@
 </template>
 
 <script>
+import config from '@/mixins/config.js';
 import { chinaMap, chinaMapOutline, option } from '@/utils/map.js';
 
 export default {
   name: 'Map',
+  mixins: [config],
   data() {
     return {
       option,
