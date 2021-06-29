@@ -13,25 +13,36 @@
         value="30.03"
         color="#fd1010" />
     </div>
+    <div class="Test test2">
+      <def-map />
+      <def-bar />
+    </div>
   </div>
 </template>
 
 <script>
 import Custom from 'comps/Custom';
+import DefMap from 'comps/Map';
+import DefBar from 'comps/Bar';
 
 export default {
   name: 'Home',
   components: {
     Custom,
+    DefMap,
+    DefBar,
   },
 };
 </script>
 
 <style lang="less" scoped>
 .Test {
-  width: 1200px;
+  width: 1400px;
   display: flex;
   margin: 0 auto;
   justify-content: space-between;
+  &.test2 {
+    margin-top: 50px;
+  }
 }
 </style>

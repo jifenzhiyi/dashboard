@@ -5,14 +5,24 @@
 </template>
 
 <script>
+import { chinaMap, chinaMapOutline, option } from '@/utils/map.js';
+
 export default {
   name: 'Map',
+  data() {
+    return {
+      option,
+      chinaMap,
+      chinaMapOutline,
+    };
+  },
   mounted() {
     this.$nextTick(() => {
       const divChart = this.$refs.myChart;
+      this.$echarts.registerMap('chinaMap', this.chinaMap);
+      this.$echarts.registerMap('chinaMapOutline', this.chinaMapOutline);
       this.myChart = this.$echarts.init(divChart);
-      this.init();
-      this.draw();
+      this.myChart.setOption(this.option);
     });
   },
 };
@@ -20,9 +30,8 @@ export default {
 
 <style lang="less" scoped>
 .def {
-  margin: 0;
-  width: 700px;
-  height: 700px;
+  width: 800px;
+  height: 600px;
   background: #ccc;
 }
 </style>
