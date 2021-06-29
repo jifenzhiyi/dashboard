@@ -5,7 +5,9 @@
 </template>
 
 <script>
-const data = [700, 500, 200, 220, 240, 90, 260, 250, 400, 380];
+const xData = ['饼干\n薯片', '蜜饯\n糖巧', '面包\n糕点', '泡面\n素食', '豆肉\n熟食', '果冻\n罐头', '礼盒', '品肆\n名酒', '果汁\n饮料', '牛奶\n乳饮'];
+const data1 = [700, 500, 200, 220, 240, 90, 260, 250, 400, 380];
+const data2 = [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000];
 const option = {
   title: {
     text: '分类分布图',
@@ -31,12 +33,12 @@ const option = {
   },
   xAxis: [{
     type: 'category',
-    data: ['饼干\n薯片', '蜜饯\n糖巧', '面包\n糕点', '泡面\n素食', '豆肉\n熟食', '果冻\n罐头', '礼盒', '品肆\n名酒', '果汁\n饮料', '牛奶\n乳饮'],
+    data: xData,
     axisTick: { alignWithLabel: true },
     nameTextStyle: { color: '#82b0ec' },
     axisLine: {
       lineStyle: {
-        color: '#ccc',
+        color: '#002e71',
       },
     },
     axisLabel: {
@@ -47,6 +49,9 @@ const option = {
   }],
   yAxis: [{
     type: 'value',
+    min: 0,
+    max: 1000,
+    position: 'left',
     axisLabel: {
       textStyle: {
         color: '#ccc',
@@ -54,8 +59,9 @@ const option = {
       formatter: '{value}',
     },
     axisLine: {
+      show: true,
       lineStyle: {
-        color: '#ccc',
+        color: '#002e71',
       },
     },
     splitLine: {
@@ -63,18 +69,40 @@ const option = {
     },
   }],
   series: [{
+    name: '', // 头部
+    type: 'pictorialBar',
+    symbolSize: [10, 5],
+    symbolOffset: [0, -2.5],
+    z: 12,
+    symbolPosition: 'end',
+    itemStyle: {
+      color: '#163F7A',
+      opacity: 1,
+    },
+    data: data2,
+  }, {
+    type: 'bar',
+    barWidth: 10,
+    barGap: '-100%',
+    z: 0,
+    itemStyle: {
+      color: '#163F7A',
+      opacity: 0.7,
+    },
+    data: data2,
+  }, {
     type: 'pictorialBar',
     symbolSize: [10, 5],
     symbolOffset: [0, -2.5],
     symbolPosition: 'end',
     z: 12,
-    data,
+    data: data1,
   }, {
     type: 'pictorialBar',
     symbolSize: [10, 5],
     symbolOffset: [0, 2.5],
     z: 12,
-    data,
+    data: data1,
   }, {
     type: 'bar',
     itemStyle: {
@@ -82,8 +110,8 @@ const option = {
         opacity: 0.7,
       },
     },
-    barWidth: '10',
-    data,
+    barWidth: 10,
+    data: data1,
     markLine: {
       silent: true,
       symbol: 'none',
