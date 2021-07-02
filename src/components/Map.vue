@@ -34,6 +34,5 @@ export default {
 .def {
   width: 800px;
   height: 600px;
-  background: #ccc;
 }
 </style>

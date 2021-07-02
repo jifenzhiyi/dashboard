@@ -1,7 +1,13 @@
 <template>
-  <div
-    class="def"
-    ref="myChart"></div>
+  <div class="content">
+    <span class="bor b1"></span>
+    <span class="bor b2"></span>
+    <span class="bor b3"></span>
+    <span class="bor b4"></span>
+    <div
+      class="def"
+      ref="myChart"></div>
+  </div>
 </template>
 
 <script>
@@ -20,7 +26,7 @@ const option = {
     x: '2%',
     y: '2%',
   },
-  backgroundColor: '#181F4E',
+  backgroundColor: '#131f41',
   color: ['#1da6ed'],
   grid: {
     left: '5%',
@@ -159,6 +165,5 @@ export default {
 .def {
   width: 550px;
   height: 270px;
-  background: #ccc;
 }
 </style>

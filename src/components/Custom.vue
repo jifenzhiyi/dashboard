@@ -278,6 +278,5 @@ export default {
 .def {
   width: 300px;
   height: 300px;
-  background: #ccc;
 }
 </style>

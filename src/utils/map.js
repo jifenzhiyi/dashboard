@@ -14074,7 +14074,6 @@ const hjDatas = [];
 Object.keys(geoCoordMap).forEach((item) => {
   hjDatas.push({ name: Number(item), value: Number(item) });
 });
-console.log('hjDatas', hjDatas);
 const series = [];
 hjDatas.forEach((item) => {
   series.push({
