@@ -14105,7 +14105,7 @@ hjDatas.forEach((item) => {
 });
 
 export const option = {
-  backgroundColor: '#181F4E',
+  // backgroundColor: '#181F4E',
   geo: {
     silent: true,
     map: 'chinaMapOutline',

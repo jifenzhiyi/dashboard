@@ -2,75 +2,174 @@
   <div
     ref="store"
     class="home">
-    <!-- <div class="Test">
-      <custom
-        value="10.01"
-        color="#0CD3DB" />
-      <custom
-        value="20.02"
-        color="#2fff5b" />
-      <custom
-        value="30.03"
-        color="#fd1010" />
-    </div> -->
-    <div class="Test test2">
+    <div class="top">
+      <img src="/images/top.png" />
+    </div>
+    <img
+      class="logo"
+      src="/images/logo.png" />
+    <div class="datetime">{{ time }}</div>
+    <div class="abs temp1">
+      <def-bar />
+    </div>
+    <div class="abs temp2">
+      <def-demo1 />
+    </div>
+    <div class="abs temp3">
       <def-map />
-      <div class="abs temp1">
-        <def-bar />
+    </div>
+    <div class="abs temp4">
+      <div
+        ref="movebox"
+        class="info">
+      <!-- :class ="{ 'animate-up': animateUp }"-->
+        <def-item
+          v-for="one in list"
+          :key="one.color"
+          :data="one" />
       </div>
-      <div class="abs temp2">
-        <def-demo1 />
-      </div>
+    </div>
+    <div class="disHeap" />
+    <div class="temp5">
+      <def-bottom />
     </div>
   </div>
 </template>
 
 <script>
-// import Custom from 'comps/Custom';
 import DefMap from 'comps/Map';
 import DefBar from 'comps/Bar';
 import DefDemo1 from 'comps/Demo1';
+import DefItem from 'comps/Item';
+import DefBottom from 'comps/Bottom';
 import { displayApp } from '@/utils/index.js';
 
 export default {
   name: 'Home',
   components: {
-    // Custom,
     DefMap,
     DefBar,
     DefDemo1,
+    DefItem,
+    DefBottom,
+  },
+  data() {
+    return {
+      time: (new Date()).toLocaleString(),
+      timeInter: null,
+      list: [
+        {
+          value: 10.01,
+          color: '#0cd3db',
+          time: '12:10',
+          desc: '<p>杭州姚生记食品有限公司提供报盘</p><p>姚生记椒盐味特好剥山核桃160g</p><p>门店零售19.5</p><p>到期时间59天</p>',
+        },
+        {
+          value: 20.02,
+          color: '#2fff5b',
+          time: '12:25',
+          desc: '<p>杭州丰一贸易有限公司提供报盘</p><p>金磨坊大面筋烧烤鸡肉味辣条100g</p><p>门店零售1.5</p><p>到期时间45天</p>',
+        },
+        {
+          value: 30.03,
+          color: '#fd1010',
+          time: '12:34',
+          desc: '<p>杭州绿强食品有限公司提供报盘</p><p>爱尚咪咪休闲小点心虾味180g</p><p>门店零售3.5</p><p>到期时间74天</p>',
+        },
+        {
+          value: 40.04,
+          color: '#fcfa48',
+          time: '12:45',
+          desc: '<p>test1</p><p>test2</p><p>test3</p><p>test4</p>',
+        },
+      ],
+      move: 3,
+      // animateUp: false,
+      // screenScroll: null,
+    };
   },
   mounted() {
     this.$refs.store.ondblclick = () => {
       displayApp.isFullScreen() ? displayApp.exitFullScreen() : displayApp.fullScreen();
     };
+    this.timeInter = setInterval(() => {
+      this.time = (new Date()).toLocaleString();
+    }, 1000);
+    this.screenScroll = setInterval(this.scrollAnimate, 4000);
+  },
+  destroyed() {
+    this.timeInter && clearInterval(this.timeInter);
+    // this.screenScroll && clearInterval(this.screenScroll);
+  },
+  methods: {
+    // 数据滚动
+    // scrollAnimate() {
+    //   console.log('move', this.move, 'length', this.list.length);
+    //   if (this.move < this.list.length) {
+    //     this.move++;
+    //     this.animateUp = true;
+    //     setTimeout(() => { this.animateUp = false; }, 500);
+    //   } else {
+    //     clearInterval(this.screenScroll);
+    //   }
+    // },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.Test {
-  width: 1400px;
+.home {
+  height: 100%;
   display: flex;
-  margin: 0 auto;
+  overflow: hidden;
   position: relative;
-  justify-content: space-between;
-  &.test2 {
-    margin-top: 50px;
+  flex-direction: column;
+  .disHeap { height: 670px; }
+  .top {
+    position: absolute;
+    left: 0; right: 0; top: -35px;
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+  .logo {
+    width: 150px;
+    position: absolute;
+    left: 60px; top: 50px;
+  }
+  .datetime {
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    right: 60px; top: 50px;
   }
   .temp1 {
-    top: 0;
-    right: 0;
-    width: 550px;
-    height: 270px;
-    background: #131f41;
+    width: 480px;
+    height: 250px;
+    top: 140px; left: 30px;
   }
   .temp2 {
-    right: 0;
-    bottom: 0;
-    width: 550px;
+    width: 480px;
     height: 250px;
+    top: 400px; left: 30px;
     background: #131f41;
+  }
+  .temp3 {
+    height: 510px;
+    overflow: hidden;
+    left: 480px; top: 140px;
+  }
+  .temp4 {
+    width: 400px;
+    height: 510px;
+    overflow: hidden;
+    right: 30px; top: 140px;
+  }
+  .temp5 {
+    flex: 1;
+    padding: 0 30px 20px;
+    position: relative;
   }
 }
 </style>

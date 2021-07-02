@@ -76,7 +76,6 @@ body {
 }
 #app {
   display: flex;
-  overflow-x: auto;
   flex-direction: column;
 }
 .middle {
@@ -116,4 +115,8 @@ body {
       border-bottom: solid 2px #3292ff;
     }
   }
+}
+.animate-up {
+  transition: all 0.5s ease-in-out;
+  transform: translateY(-160px);
 }

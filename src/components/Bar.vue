@@ -21,10 +21,10 @@ const option = {
     text: '分类分布图',
     textStyle: {
       color: '#fff',
-      fontSize: 14,
+      fontSize: 16,
     },
-    x: '2%',
-    y: '2%',
+    x: '3%',
+    y: '3%',
   },
   backgroundColor: '#131f41',
   color: ['#1da6ed'],
@@ -46,6 +46,7 @@ const option = {
     },
     axisLabel: {
       textStyle: {
+        fontSize: 12,
         color: '#ccc',
       },
     },
@@ -163,7 +164,7 @@ export default {
 
 <style lang="less" scoped>
 .def {
-  width: 550px;
-  height: 270px;
+  width: 480px;
+  height: 250px;
 }
 </style>

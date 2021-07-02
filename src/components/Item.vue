@@ -1,0 +1,67 @@
+<template>
+<div class="item">
+  <div class="content">
+    <span class="bor b1"></span>
+    <span class="bor b2"></span>
+    <span class="bor b3"></span>
+    <span class="bor b4"></span>
+    <div class="info">
+      <h3>{{ data.time }}</h3>
+      <div
+        class="desc"
+        v-html="data.desc" />
+    </div>
+    <div class="cur">
+      <custom
+        :value="data.value"
+        :color="data.color" />
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import Custom from 'comps/Custom';
+
+export default {
+  name: 'Item',
+  props: ['data'],
+  components: { Custom },
+};
+</script>
+
+<style lang="less" scoped>
+.item {
+  width: 400px;
+  height: 160px;
+  display: flex;
+  margin-bottom: 10px;
+  background: #122041;
+  .cur {
+    width: 160px;
+    height: 160px;
+  }
+  .info {
+    flex: 1;
+    height: 160px;
+    display: flex;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-left: 20px;
+    flex-direction: column;
+    h3 {
+      opacity: 0.7;
+      color: #2ff8ff;
+      font-size: 24px;
+      text-align: left;
+    }
+    .desc {
+      opacity: 0.7;
+      color: #fff;
+      font-size: 14px;
+      text-align: left;
+      line-height: 26px;
+    }
+  }
+}
+</style>

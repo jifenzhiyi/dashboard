@@ -44,7 +44,6 @@ export default {
     init() {
       const self = this;
       this.option = {
-        backgroundColor: '#061740',
         title: {
           text: `{a|${this.value}}`, // {c|%}
           x: 'center',
@@ -242,7 +241,7 @@ export default {
         }, {
           name: '',
           type: 'gauge',
-          radius: '64%',
+          radius: '70%',
           center: ['50%', '50%'],
           startAngle: 0,
           endAngle: 360,
@@ -276,7 +275,7 @@ export default {
 
 <style lang="less" scoped>
 .def {
-  width: 300px;
-  height: 300px;
+  width: 160px;
+  height: 160px;
 }
 </style>
