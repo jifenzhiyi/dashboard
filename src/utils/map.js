@@ -14046,29 +14046,28 @@ export const chinaMapOutline = {
   ],
 };
 
-// echarts.registerMap('chinaMap', chinaMap);
-// echarts.registerMap('chinaMapOutline', chinaMapOutline);
 const geoCoordMap = {
-  1: [113, 34],
+  1: [109.5, 34],
   2: [107, 27],
-  3: [103, 24],
-  4: [130, 46],
-  5: [120, 44],
-  6: [122, 49.5],
-  7: [126, 47],
-  8: [126, 43],
-  9: [123, 41],
-  10: [115.5, 38],
-  11: [118, 36],
-  12: [120, 33],
-  13: [120, 29],
-  14: [117, 31.5],
-  15: [118, 26],
-  18: [115.5, 28],
-  19: [114, 24],
-  20: [112, 28],
-  21: [112, 31],
-  22: [109, 23.5],
+  3: [103, 22],
+  4: [130, 44],
+  5: [121, 46],
+  6: [122, 49],
+  7: [127, 46.5],
+  8: [126, 42],
+  9: [123.5, 39.5],
+  10: [116.5, 38],
+  11: [118, 34],
+  12: [115, 35.5],
+  13: [120, 30],
+  14: [117.5, 29],
+  15: [116, 26],
+  18: [114, 28.5],
+  19: [112, 25],
+  20: [113, 31.5],
+  21: [109, 21.5],
+  22: [107, 24.5],
+  23: [114, 21.5],
 };
 const hjDatas = [];
 Object.keys(geoCoordMap).forEach((item) => {
@@ -14105,12 +14104,11 @@ hjDatas.forEach((item) => {
 });
 
 export const option = {
-  // backgroundColor: '#181F4E',
   geo: {
     silent: true,
     map: 'chinaMapOutline',
     show: false,
-    zoom: 0.8,
+    zoom: 1,
     top: '0%',
     label: {
       normal: {
@@ -14132,7 +14130,7 @@ export const option = {
           type: 'linear-gradient',
           x: 0.5,
           y: 0.5,
-          r: 0.8,
+          r: 1,
           colorStops: [
             { offset: 0, color: 'rgba(45,68,121,0.15)' },
             { offset: 1, color: 'rgba(45,68,121,0.18)' },
@@ -14161,7 +14159,7 @@ export const option = {
       map: 'chinaMapOutline',
       silent: true,
       type: 'map',
-      zoom: 0.8,
+      zoom: 1,
       label: {
         normal: {
           show: false,
@@ -14175,7 +14173,7 @@ export const option = {
           },
         },
       },
-      top: '0%',
+      top: '4%',
       roam: false,
       itemStyle: {
         normal: {
@@ -14198,7 +14196,7 @@ export const option = {
     {
       map: 'chinaMap',
       type: 'map',
-      zoom: 1.14,
+      zoom: 1.26,
       label: {
         normal: {
           show: false,

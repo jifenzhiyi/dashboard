@@ -135,13 +135,12 @@ export default {
   .temp2 {
     width: 480px;
     height: 250px;
-    top: 400px; left: 30px;
     background: #131f41;
+    top: 400px; left: 30px;
   }
   .temp3 {
     height: 510px;
-    // overflow: hidden;
-    left: 480px; top: 100px;
+    left: 480px; top: 140px;
   }
   .temp4 {
     width: 400px;
@@ -150,9 +149,8 @@ export default {
     right: 30px; top: 140px;
   }
   .temp5 {
-    // flex: 1;
-    top: 670px; bottom: 20px; left: 30px; right: 20px;
     position: absolute;
+    top: 670px; bottom: 20px; left: 30px; right: 20px;
   }
 }
 </style>

@@ -208,7 +208,6 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  background: #122041;
   .list {
     width: 100%;
     height: 100%;
@@ -218,7 +217,6 @@ export default {
       width: 100%;
       display: flex;
       span {
-        // flex: 1;
         height: 50px;
         color: #fff;
         display: flex;
@@ -247,10 +245,19 @@ export default {
         height: 42px;
         display: flex;
         overflow: hidden;
+        position: relative;
         white-space: nowrap;
         align-items: center;
-        background: #18264d;
         text-overflow: ellipsis;
+        &::after {
+          opacity: 0.3;
+          width: 100%;
+          height: 100%;
+          content: ' ';
+          top: 0; left: 0;
+          position: absolute;
+          background: #18264d;
+        }
         &.img {
           width: 70px;
           position: relative;

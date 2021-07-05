@@ -33,6 +33,6 @@ export default {
 <style lang="less" scoped>
 .def {
   width: 800px;
-  height: 600px;
+  height: 700px;
 }
 </style>
