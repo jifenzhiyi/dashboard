@@ -19,10 +19,7 @@
       <def-map />
     </div>
     <div class="abs temp4">
-      <div
-        ref="movebox"
-        class="info">
-      <!-- :class ="{ 'animate-up': animateUp }"-->
+      <div class="info">
         <def-item
           v-for="one in list"
           :key="one.color"
@@ -99,20 +96,6 @@ export default {
   },
   destroyed() {
     this.timeInter && clearInterval(this.timeInter);
-    // this.screenScroll && clearInterval(this.screenScroll);
-  },
-  methods: {
-    // 数据滚动
-    // scrollAnimate() {
-    //   console.log('move', this.move, 'length', this.list.length);
-    //   if (this.move < this.list.length) {
-    //     this.move++;
-    //     this.animateUp = true;
-    //     setTimeout(() => { this.animateUp = false; }, 500);
-    //   } else {
-    //     clearInterval(this.screenScroll);
-    //   }
-    // },
   },
 };
 </script>
@@ -157,8 +140,8 @@ export default {
   }
   .temp3 {
     height: 510px;
-    overflow: hidden;
-    left: 480px; top: 140px;
+    // overflow: hidden;
+    left: 480px; top: 100px;
   }
   .temp4 {
     width: 400px;
@@ -167,9 +150,9 @@ export default {
     right: 30px; top: 140px;
   }
   .temp5 {
-    flex: 1;
-    padding: 0 30px 20px;
-    position: relative;
+    // flex: 1;
+    top: 670px; bottom: 20px; left: 30px; right: 20px;
+    position: absolute;
   }
 }
 </style>
