@@ -31,7 +31,6 @@ export default {
       const divChart = this.$refs.myChart;
       this.myChart = this.$echarts.init(divChart);
       this.init();
-      // setTimeout(this.draw(), 1000);
     });
   },
   destroyed() {

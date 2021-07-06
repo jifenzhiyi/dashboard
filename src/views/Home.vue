@@ -19,7 +19,9 @@
       <def-map />
     </div>
     <div class="abs temp4">
-      <div class="info">
+      <div
+        class="info"
+        :class ="{ 'animate-up': animateUp }">
         <def-item
           v-for="one in list"
           :key="one.color"
@@ -77,12 +79,12 @@ export default {
           value: 40.04,
           color: '#fcfa48',
           time: '12:45',
-          desc: '<p>test1</p><p>test2</p><p>test3</p><p>test4</p>',
+          desc: '<p>供应商报盘信息</p><p>乐视薯片100g 1000箱</p><p>门店零售104</p><p>到期时间45天</p>',
         },
       ],
       move: 3,
-      // animateUp: false,
-      // screenScroll: null,
+      animateUp: false,
+      screenScroll: null,
     };
   },
   mounted() {
@@ -92,10 +94,20 @@ export default {
     this.timeInter = setInterval(() => {
       this.time = (new Date()).toLocaleString();
     }, 1000);
-    this.screenScroll = setInterval(this.scrollAnimate, 4000);
+    this.screenScroll = setInterval(this.scrollAnimate, 8000);
   },
   destroyed() {
     this.timeInter && clearInterval(this.timeInter);
+  },
+  methods: {
+    scrollAnimate() {
+      this.animateUp = true;
+      setTimeout(() => {
+        this.list.push(this.list[0]);
+        this.list.shift();
+        this.animateUp = false;
+      }, 500);
+    },
   },
 };
 </script>
