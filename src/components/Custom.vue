@@ -31,7 +31,7 @@ export default {
       const divChart = this.$refs.myChart;
       this.myChart = this.$echarts.init(divChart);
       this.init();
-      // this.draw();
+      // setTimeout(this.draw(), 1000);
     });
   },
   destroyed() {
@@ -41,9 +41,7 @@ export default {
     draw() {
       this.angle += 2;
       this.myChart.setOption(this.option);
-      this.timer = setInterval(() => {
-        this.draw();
-      }, 100);
+      this.timer = setInterval(this.draw(), 100);
     },
     init() {
       const self = this;
@@ -255,7 +253,7 @@ export default {
           splitLine: {
             length: 50,
             lineStyle: {
-              width: 5,
+              width: 2,
               color: '#152244',
             },
           },

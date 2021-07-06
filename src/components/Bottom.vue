@@ -233,7 +233,6 @@ export default {
       const moveTarget = this.$refs.movebox;
       moveTarget.style = `transform: translateY(-${0}px)`;
       this.skuWarning && (this.oldCount = this.skuWarning.length);
-      console.log('outbox height', outbox.offsetHeight, 'moveTarget height', moveTarget.offsetHeight);
       if (outbox.offsetHeight > moveTarget.offsetHeight) {
         this.isShow = false;
         return;
