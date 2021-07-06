@@ -140,10 +140,10 @@ export default {
   }
   .temp3 {
     height: 510px;
-    left: 480px; top: 140px;
+    left: 480px; top: 130px;
   }
   .temp4 {
-    width: 400px;
+    width: 410px;
     height: 510px;
     overflow: hidden;
     right: 30px; top: 140px;

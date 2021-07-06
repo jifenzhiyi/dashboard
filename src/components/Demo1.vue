@@ -164,7 +164,7 @@ export default {
   }
   h3 {
     color: #fff;
-    font-size: 18px;
+    font-size: 18PX;
     text-align: left;
     padding-top: 5px;
     padding-bottom: 10px;
@@ -212,6 +212,7 @@ export default {
       }
       .o3 {
         color: #fff;
+        font-size: 12px;
         padding-left: 10px;
       }
     }

@@ -21,7 +21,7 @@ const option = {
     text: '分类分布图',
     textStyle: {
       color: '#fff',
-      fontSize: 16,
+      fontSize: 18,
     },
     x: '3%',
     y: '3%',
@@ -46,7 +46,7 @@ const option = {
     },
     axisLabel: {
       textStyle: {
-        fontSize: 12,
+        fontSize: 10,
         color: '#ccc',
       },
     },

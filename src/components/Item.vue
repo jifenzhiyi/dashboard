@@ -32,17 +32,19 @@ export default {
 
 <style lang="less" scoped>
 .item {
-  width: 400px;
+  width: 410px;
   height: 160px;
   display: flex;
+  position: relative;
   margin-bottom: 10px;
   background: #122041;
   .cur {
     width: 160px;
     height: 160px;
+    top: 0; right: -5px;
+    position: absolute;
   }
   .info {
-    flex: 1;
     height: 160px;
     display: flex;
     overflow: hidden;
@@ -58,7 +60,6 @@ export default {
     .desc {
       opacity: 0.7;
       color: #fff;
-      font-size: 14px;
       text-align: left;
       line-height: 26px;
     }
