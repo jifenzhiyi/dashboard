@@ -131,7 +131,7 @@ export default {
   .logo {
     width: 150px;
     position: absolute;
-    left: 60px; top: 50px;
+    left: 60px; top: 40px;
   }
   .datetime {
     color: #fff;
@@ -142,27 +142,27 @@ export default {
   .temp1 {
     width: 480px;
     height: 250px;
-    top: 140px; left: 30px;
+    top: 120px; left: 30px;
   }
   .temp2 {
     width: 480px;
     height: 250px;
     background: #131f41;
-    top: 400px; left: 30px;
+    top: 390px; left: 30px;
   }
   .temp3 {
     height: 510px;
-    left: 480px; top: 130px;
+    left: 480px; top: 120px;
   }
   .temp4 {
     width: 410px;
     height: 510px;
     overflow: hidden;
-    right: 30px; top: 140px;
+    right: 30px; top: 130px;
   }
   .temp5 {
     position: absolute;
-    top: 670px; bottom: 20px; left: 30px; right: 20px;
+    top: 660px; bottom: 20px; left: 30px; right: 20px;
   }
 }
 </style>
