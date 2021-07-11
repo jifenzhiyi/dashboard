@@ -36,7 +36,7 @@ export default {
   height: 160px;
   display: flex;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background: #122041;
   .cur {
     width: 160px;
