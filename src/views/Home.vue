@@ -129,7 +129,7 @@ export default {
     }
   }
   .logo {
-    width: 150px;
+    width: 149px;
     position: absolute;
     left: 60px; top: 40px;
   }
@@ -158,7 +158,7 @@ export default {
     width: 410px;
     height: 510px;
     overflow: hidden;
-    right: 30px; top: 130px;
+    right: 20px; top: 120px;
   }
   .temp5 {
     position: absolute;
