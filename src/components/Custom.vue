@@ -14,32 +14,27 @@ export default {
     return {
       angle: 0,
       option: {},
-      timer: null,
       myChart: null,
       fontSize: 18,
       radius: '75%',
     };
+  },
+  watch: {
+    value() {
+      this.init();
+    },
   },
   mounted() {
     this.$nextTick(() => {
       const bodyWidth = document.getElementById('app').clientWidth;
       bodyWidth < 1440 ? (this.fontSize = 12) : (this.fontSize = 18);
       bodyWidth < 1440 ? (this.radius = '90%') : (this.radius = '75%');
-      console.log('bodyWidth', bodyWidth, 'radius', this.radius);
       const divChart = this.$refs.myChart;
       this.myChart = this.$echarts.init(divChart);
       this.init();
     });
   },
-  destroyed() {
-    clearInterval(this.timer);
-  },
   methods: {
-    draw() {
-      this.angle += 2;
-      this.myChart.setOption(this.option);
-      this.timer = setInterval(this.draw(), 100);
-    },
     init() {
       const self = this;
       this.option = {
@@ -268,7 +263,7 @@ export default {
           },
         ],
       };
-      this.myChart.setOption(this.option, true);
+      this.myChart.setOption(this.option, false);
     },
   },
 };

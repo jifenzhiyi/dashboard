@@ -87,7 +87,7 @@ export default {
               index++;
               if (index === 4) index = 0;
               ws[i].value = ws[i].val4;
-              ws[i].desc = `<p>${ws[i].val1}</p><p>${ws[i].name}</p><p>供货价格${ws[i].val4}</p><p>到期时间${ws[i].endTime}天</p>`;
+              ws[i].desc = `<p>${ws[i].val1}</p><p>${ws[i].name}</p><p>供货价格${ws[i].value}</p><p>到期时间${ws[i].endTime}天</p>`;
               excellist.push(ws[i]);
             }
             this.list = excellist;
@@ -102,8 +102,9 @@ export default {
     scrollAnimate() {
       this.animateUp = true;
       setTimeout(() => {
-        this.list.push(this.list[0]);
-        this.list.shift();
+        const item = this.list.shift();
+        console.log('shift item', item);
+        this.list.push(item);
         this.animateUp = false;
       }, 500);
     },

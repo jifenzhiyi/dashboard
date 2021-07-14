@@ -6,11 +6,14 @@
       <span class="bor b3"></span>
       <span class="bor b4"></span>
       <div class="info">
+        <!-- <h3>&nbsp;{{ data.value }}</h3> -->
         <p>&nbsp;</p>
         <div class="desc" v-html="data.desc" />
       </div>
-      <div class="cur">
-        <custom v-if="data.value && data.color" :value="data.value" :color="data.color" />
+      <div
+        class="cur"
+        :val="data.value">
+        <custom :value="data.value" :color="data.color" />
       </div>
     </div>
   </div>

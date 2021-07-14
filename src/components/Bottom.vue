@@ -40,7 +40,7 @@
               <span class="td t7">{{ item.startTime }}</span>
               <span class="td t8">{{ item.endTime }}</span>
               <span class="td t8a">{{ item.spec }}</span>
-              <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val1 }}</span>
+              <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val1 }}%</span>
               <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val2 }}</span>
               <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val3 }}</span>
               <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val4 }}</span>
@@ -62,7 +62,7 @@
                 <span class="td t7">{{ item.startTime }}</span>
                 <span class="td t8">{{ item.endTime }}</span>
                 <span class="td t8a">{{ item.spec }}</span>
-                <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val1 }}</span>
+                <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val1 }}%</span>
                 <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val2 }}</span>
                 <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val3 }}</span>
                 <span :class="['td', item.valType === 'up' ? 'tup' : 'tdown']">{{ item.val4 }}</span>
@@ -81,6 +81,7 @@
 <script>
 import xlsx from 'xlsx';
 import axios from 'axios';
+import moment from 'moment';
 import config from '@/mixins/config.js';
 
 export default {
@@ -105,7 +106,7 @@ export default {
           try {
             const data = ev.target.result;
             const XLSX = xlsx;
-            const workbook = XLSX.read(data, { type: 'binary' });
+            const workbook = XLSX.read(data, { type: 'binary', cellDates: true });
             const wsname = workbook.SheetNames[0]; // 取第一张表，wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
             const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); // 生成json表格内容，wb.Sheets[Sheet名]获取第一个Sheet的数据
             const excellist = []; // 清空接收数据
@@ -113,10 +114,12 @@ export default {
             for (let i = 0; i < ws.length; i++) {
               if (i === 0) console.log(ws[i]);
               ws[i].val1 > 0 ? (ws[i].valType = 'up') : (ws[i].valType = 'down');
+              ws[i].val1 = (ws[i].val1 * 100).toFixed(2);
+              ws[i].startTime = moment(ws[i].startTime).format('YYYY-MM-DD');
               excellist.push(ws[i]);
             }
             this.list = excellist;
-            this.init();
+            window.setTimeout(() => { this.init(); }, 500);
           } catch {
             return console.warn('读取失败 2');
           }
@@ -130,6 +133,7 @@ export default {
       const moveTarget = this.$refs.movebox;
       moveTarget.style = `transform: translateY(-${0}px)`;
       this.skuWarning && (this.oldCount = this.skuWarning.length);
+      console.log('init offsetHeight', outbox.offsetHeight, 'moveTarget', moveTarget.offsetHeight);
       if (outbox.offsetHeight > moveTarget.offsetHeight) {
         this.isShow = false;
         return;
