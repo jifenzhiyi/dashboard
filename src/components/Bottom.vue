@@ -92,7 +92,6 @@
 import axios from 'axios';
 import xlsx from 'xlsx';
 import config from '@/mixins/config.js';
-// import list from '@/utils/data.js';
 
 export default {
   name: 'Bottom',
