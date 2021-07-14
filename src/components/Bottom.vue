@@ -89,24 +89,52 @@
 </template>
 
 <script>
+import axios from 'axios';
+import xlsx from 'xlsx';
 import config from '@/mixins/config.js';
-import list from '@/utils/data.js';
+// import list from '@/utils/data.js';
 
 export default {
   name: 'Bottom',
   mixins: [config],
   data() {
     return {
-      list,
+      list: [],
       isShow: false,
       animateUp: false,
       marquee: null,
     };
   },
   mounted() {
-    this.init();
+    this.ReadExcel();
   },
   methods: {
+    ReadExcel() {
+      axios.get('/test.xls', { responseType: 'blob' }).then((res) => {
+        const fileReader = new FileReader();
+        fileReader.onload = (ev) => {
+          try {
+            const data = ev.target.result;
+            const XLSX = xlsx;
+            const workbook = XLSX.read(data, { type: 'binary' });
+            const wsname = workbook.SheetNames[0]; // 取第一张表，wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+            const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); // 生成json表格内容，wb.Sheets[Sheet名]获取第一个Sheet的数据
+            const excellist = []; // 清空接收数据
+            // 编辑数据
+            for (let i = 0; i < ws.length; i++) {
+              if (i === 0) console.log(ws[i]);
+              ws[i].val1 > 0 ? ws[i].valType = 'up' : ws[i].valType = 'down';
+              excellist.push(ws[i]);
+            }
+            this.list = excellist;
+            this.init();
+          } catch {
+            return console.warn('读取失败');
+          }
+        };
+        fileReader.readAsBinaryString(res.data);
+      });
+    },
     init() {
       this.marquee && clearInterval(this.marquee);
       const outbox = this.$refs.outbox;
