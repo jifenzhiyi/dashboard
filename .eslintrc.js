@@ -34,7 +34,7 @@ module.exports = {
     'no-plusplus': 0,
     'prefer-promise-reject-errors': 0,
     'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
-    'vue/max-attributes-per-line': 1,
+    'vue/max-attributes-per-line': 0,
     'vue/require-valid-default-prop': 0,
     'no-trailing-spaces': 0,
     'no-mixed-operators': 0,

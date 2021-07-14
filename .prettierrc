@@ -4,10 +4,15 @@
   "printWidth": 140,
   "arrowParens": "always",
   "jsxBracketSameLine": true,
+  "prettier.disableLanguages": [
+    "vue"
+  ],
   "overrides": [
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json"
+      }
     }
   ]
 }

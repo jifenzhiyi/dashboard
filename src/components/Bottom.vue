@@ -25,16 +25,9 @@
           <span class="s11">官方零售</span>
           <span class="s12">库存</span>
         </div>
-        <div
-          ref='outbox'
-          class="list_main">
-          <div
-            ref="movebox"
-            class="sub_main">
-            <div
-              v-for="item in list"
-              :key="item.id"
-              class="tr">
+        <div ref="outbox" class="list_main">
+          <div ref="movebox" class="sub_main">
+            <div v-for="(item, idx) in list" :key="idx" class="tr">
               <span class="img">
                 <img :src="item.src" />
               </span>
@@ -56,10 +49,7 @@
               <span class="td t9">{{ item.num }}</span>
             </div>
             <div v-if="isShow">
-              <div
-                v-for="item in list"
-                :key="item.id"
-                class="tr">
+              <div v-for="item in list" :key="item.id" class="tr">
                 <span class="img">
                   <img :src="item.src" />
                 </span>
@@ -89,8 +79,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import xlsx from 'xlsx';
+import axios from 'axios';
 import config from '@/mixins/config.js';
 
 export default {
@@ -122,13 +112,13 @@ export default {
             // 编辑数据
             for (let i = 0; i < ws.length; i++) {
               if (i === 0) console.log(ws[i]);
-              ws[i].val1 > 0 ? ws[i].valType = 'up' : ws[i].valType = 'down';
+              ws[i].val1 > 0 ? (ws[i].valType = 'up') : (ws[i].valType = 'down');
               excellist.push(ws[i]);
             }
             this.list = excellist;
             this.init();
           } catch {
-            return console.warn('读取失败');
+            return console.warn('读取失败 2');
           }
         };
         fileReader.readAsBinaryString(res.data);
@@ -183,17 +173,41 @@ export default {
         align-items: center;
         white-space: nowrap;
         text-overflow: ellipsis;
-        &.s1 { width: 70px; }
-        &.s2 { width: 134px; }
-        &.s3 { width: 210px; }
-        &.s4 { width: 90px; }
-        &.s5 { width: 60px; }
-        &.s6 { width: 90px; }
-        &.s7 { width: 70px; }
-        &.s8, &.s9 { width: 100px; }
-        &.s10 { width: 110px; }
-        &.s11 { width: 90px; justify-content: center; }
-        &.s12 { flex: 1; }
+        &.s1 {
+          width: 70px;
+        }
+        &.s2 {
+          width: 134px;
+        }
+        &.s3 {
+          width: 210px;
+        }
+        &.s4 {
+          width: 90px;
+        }
+        &.s5 {
+          width: 60px;
+        }
+        &.s6 {
+          width: 90px;
+        }
+        &.s7 {
+          width: 70px;
+        }
+        &.s8,
+        &.s9 {
+          width: 100px;
+        }
+        &.s10 {
+          width: 110px;
+        }
+        &.s11 {
+          width: 90px;
+          justify-content: center;
+        }
+        &.s12 {
+          flex: 1;
+        }
       }
     }
     .list_main {
@@ -217,7 +231,8 @@ export default {
             width: 100%;
             height: 100%;
             content: ' ';
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             position: absolute;
             background: #18264d;
           }
@@ -228,7 +243,8 @@ export default {
               width: 22px;
               height: 15px;
               content: ' ';
-              top: 0; left: 0;
+              top: 0;
+              left: 0;
               position: absolute;
               background: url(/images/ico.png) center no-repeat;
               background-size: 100% 100%;
@@ -242,18 +258,49 @@ export default {
           &.td {
             color: #fff;
             position: relative;
-            &.t1 { width: 134px; }
-            &.t2 { width: 190px; margin-right: 20px; }
-            &.t3 { width: 90px; }
-            &.t4 { width: 60px; }
-            &.t5 { width: 90px; color: #f00; }
-            &.t6 { width: 70px; }
-            &.t7 { width: 100px; }
-            &.t8 { width: 100px; justify-content: center;}
-            &.t8a { width: 110px;}
-            &.tup { width: 90px; color: #f00; justify-content: center;}
-            &.tdown { width: 90px; color: lawngreen; justify-content: center;}
-            &.t9 { flex: 1; }
+            &.t1 {
+              width: 134px;
+            }
+            &.t2 {
+              width: 190px;
+              margin-right: 20px;
+            }
+            &.t3 {
+              width: 90px;
+            }
+            &.t4 {
+              width: 60px;
+            }
+            &.t5 {
+              width: 90px;
+              color: #f00;
+            }
+            &.t6 {
+              width: 70px;
+            }
+            &.t7 {
+              width: 100px;
+            }
+            &.t8 {
+              width: 100px;
+              justify-content: center;
+            }
+            &.t8a {
+              width: 110px;
+            }
+            &.tup {
+              width: 90px;
+              color: #f00;
+              justify-content: center;
+            }
+            &.tdown {
+              width: 90px;
+              color: lawngreen;
+              justify-content: center;
+            }
+            &.t9 {
+              flex: 1;
+            }
           }
         }
       }

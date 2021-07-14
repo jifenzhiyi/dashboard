@@ -1,23 +1,19 @@
 <template>
-<div class="item">
-  <div class="content">
-    <span class="bor b1"></span>
-    <span class="bor b2"></span>
-    <span class="bor b3"></span>
-    <span class="bor b4"></span>
-    <div class="info">
-      <h3>{{ data.time }}</h3>
-      <div
-        class="desc"
-        v-html="data.desc" />
-    </div>
-    <div class="cur">
-      <custom
-        :value="data.value"
-        :color="data.color" />
+  <div class="item">
+    <div class="content">
+      <span class="bor b1"></span>
+      <span class="bor b2"></span>
+      <span class="bor b3"></span>
+      <span class="bor b4"></span>
+      <div class="info">
+        <p>&nbsp;</p>
+        <div class="desc" v-html="data.desc" />
+      </div>
+      <div class="cur">
+        <custom v-if="data.value && data.color" :value="data.value" :color="data.color" />
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -41,7 +37,8 @@ export default {
   .cur {
     width: 160px;
     height: 160px;
-    top: 0; right: -5px;
+    top: 0;
+    right: -5px;
     position: absolute;
   }
   .info {

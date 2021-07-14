@@ -1,13 +1,9 @@
 <template>
-  <div
-    ref="store"
-    class="home">
+  <div ref="store" class="home">
     <div class="top">
       <img src="/images/top.png" />
     </div>
-    <img
-      class="logo"
-      src="/images/logo.png" />
+    <img class="logo" src="/images/logo.png" />
     <div class="datetime">{{ time }}</div>
     <div class="abs temp1">
       <def-bar />
@@ -19,13 +15,8 @@
       <def-map />
     </div>
     <div class="abs temp4">
-      <div
-        class="info"
-        :class ="{ 'animate-up': animateUp }">
-        <def-item
-          v-for="one in list"
-          :key="one.color"
-          :data="one" />
+      <div class="info" :class="{ 'animate-up': animateUp }">
+        <def-item v-for="(one, idx) in list" :key="idx" :data="one" />
       </div>
     </div>
     <div class="disHeap" />
@@ -36,6 +27,8 @@
 </template>
 
 <script>
+import xlsx from 'xlsx';
+import axios from 'axios';
 import DefMap from 'comps/Map';
 import DefBar from 'comps/Bar';
 import DefDemo1 from 'comps/Demo1';
@@ -54,52 +47,58 @@ export default {
   },
   data() {
     return {
-      time: (new Date()).toLocaleString(),
+      time: new Date().toLocaleString(),
       timeInter: null,
-      list: [
-        {
-          value: 10.01,
-          color: '#0cd3db',
-          time: '12:10',
-          desc: '<p>杭州姚生记食品有限公司提供报盘</p><p>姚生记椒盐味特好剥山核桃160g</p><p>门店零售19.5</p><p>到期时间59天</p>',
-        },
-        {
-          value: 20.02,
-          color: '#2fff5b',
-          time: '12:25',
-          desc: '<p>杭州丰一贸易有限公司提供报盘</p><p>金磨坊大面筋烧烤鸡肉味辣条100g</p><p>门店零售1.5</p><p>到期时间45天</p>',
-        },
-        {
-          value: 30.03,
-          color: '#fd1010',
-          time: '12:34',
-          desc: '<p>杭州绿强食品有限公司提供报盘</p><p>爱尚咪咪休闲小点心虾味180g</p><p>门店零售3.5</p><p>到期时间74天</p>',
-        },
-        {
-          value: 40.04,
-          color: '#fcfa48',
-          time: '12:45',
-          desc: '<p>供应商报盘信息</p><p>乐视薯片100g 1000箱</p><p>门店零售104</p><p>到期时间45天</p>',
-        },
-      ],
+      list: [],
       move: 3,
       animateUp: false,
       screenScroll: null,
     };
   },
   mounted() {
+    this.ReadExcel();
     this.$refs.store.ondblclick = () => {
       displayApp.isFullScreen() ? displayApp.exitFullScreen() : displayApp.fullScreen();
     };
     this.timeInter = setInterval(() => {
-      this.time = (new Date()).toLocaleString();
+      this.time = new Date().toLocaleString();
     }, 1000);
-    this.screenScroll = setInterval(this.scrollAnimate, 8000);
   },
   destroyed() {
     this.timeInter && clearInterval(this.timeInter);
   },
   methods: {
+    ReadExcel() {
+      axios.get('/test.xls', { responseType: 'blob' }).then((res) => {
+        const fileReader = new FileReader();
+        fileReader.onload = (ev) => {
+          try {
+            const data = ev.target.result;
+            const XLSX = xlsx;
+            const workbook = XLSX.read(data, { type: 'binary' });
+            const wsname = workbook.SheetNames[1];
+            const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); // 生成json表格内容，wb.Sheets[Sheet名]获取第一个Sheet的数据
+            const excellist = []; // 清空接收数据
+            // 编辑数据
+            const colorList = ['#0cd3db', '#2fff5b', '#fd1010', '#fcfa48'];
+            let index = 0;
+            for (let i = 0; i < ws.length; i++) {
+              ws[i].color = colorList[index];
+              index++;
+              if (index === 4) index = 0;
+              ws[i].value = ws[i].val4;
+              ws[i].desc = `<p>${ws[i].val1}</p><p>${ws[i].name}</p><p>供货价格${ws[i].val4}</p><p>到期时间${ws[i].endTime}天</p>`;
+              excellist.push(ws[i]);
+            }
+            this.list = excellist;
+            this.screenScroll = setInterval(this.scrollAnimate, 8000);
+          } catch {
+            return console.warn('读取失败 1');
+          }
+        };
+        fileReader.readAsBinaryString(res.data);
+      });
+    },
     scrollAnimate() {
       this.animateUp = true;
       setTimeout(() => {
@@ -119,10 +118,14 @@ export default {
   overflow: hidden;
   position: relative;
   flex-direction: column;
-  .disHeap { height: 670px; }
+  .disHeap {
+    height: 670px;
+  }
   .top {
     position: absolute;
-    left: 0; right: 0; top: -35px;
+    left: 0;
+    right: 0;
+    top: -35px;
     img {
       width: 100%;
       display: block;
@@ -131,38 +134,47 @@ export default {
   .logo {
     width: 149px;
     position: absolute;
-    left: 60px; top: 40px;
+    left: 60px;
+    top: 40px;
   }
   .datetime {
     color: #fff;
     font-size: 18px;
     position: absolute;
-    right: 60px; top: 50px;
+    right: 60px;
+    top: 50px;
   }
   .temp1 {
     width: 480px;
     height: 250px;
-    top: 120px; left: 30px;
+    top: 120px;
+    left: 30px;
   }
   .temp2 {
     width: 480px;
     height: 250px;
     background: #131f41;
-    top: 390px; left: 30px;
+    top: 390px;
+    left: 30px;
   }
   .temp3 {
     height: 510px;
-    left: 480px; top: 120px;
+    left: 480px;
+    top: 120px;
   }
   .temp4 {
     width: 410px;
     height: 510px;
     overflow: hidden;
-    right: 20px; top: 120px;
+    right: 20px;
+    top: 120px;
   }
   .temp5 {
     position: absolute;
-    top: 660px; bottom: 20px; left: 30px; right: 20px;
+    top: 660px;
+    bottom: 20px;
+    left: 30px;
+    right: 20px;
   }
 }
 </style>
