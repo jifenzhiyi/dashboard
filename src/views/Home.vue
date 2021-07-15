@@ -103,7 +103,6 @@ export default {
       this.animateUp = true;
       setTimeout(() => {
         const item = this.list.shift();
-        console.log('shift item', item);
         this.list.push(item);
         this.animateUp = false;
       }, 500);

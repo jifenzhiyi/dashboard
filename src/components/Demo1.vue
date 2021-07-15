@@ -75,68 +75,17 @@
     <div class="one one1">
       <h3>本周报盘金额</h3>
       <div class="list">
-        <div class="item">
-          <div class="o1a">周五</div>
+        <div
+          class="item"
+          v-for="(item, index) in list"
+          :key="index">
+          <div class="o1a">{{ item.key }}</div>
           <div class="o2">
             <div
               class="line1"
-              style="width:68%;" />
+              :style="`width:${item.width}%;`" />
           </div>
-          <div class="o3">2329784.00</div>
-        </div>
-        <div class="item">
-          <div class="o1a">周四</div>
-          <div class="o2">
-            <div
-              class="line1"
-              style="width:54%;" />
-          </div>
-          <div class="o3">1640906.00</div>
-        </div>
-        <div class="item">
-          <div class="o1a">周三</div>
-          <div class="o2">
-            <div
-              class="line1"
-              style="width:67%;" />
-          </div>
-          <div class="o3">2254914.00</div>
-        </div>
-        <div class="item">
-          <div class="o1a">周二</div>
-          <div class="o2">
-            <div
-              class="line1"
-              style="width:66%;" />
-          </div>
-          <div class="o3">2118343.00</div>
-        </div>
-        <div class="item">
-          <div class="o1a">周一</div>
-          <div class="o2">
-            <div
-              class="line1"
-              style="width:98%;" />
-          </div>
-          <div class="o3">2904920.00</div>
-        </div>
-        <div class="item">
-          <div class="o1a">周日</div>
-          <div class="o2">
-            <div
-              class="line1"
-              style="width:44%;" />
-          </div>
-          <div class="o3">1982446.00</div>
-        </div>
-        <div class="item">
-          <div class="o1a">周六</div>
-          <div class="o2">
-            <div
-              class="line1"
-              style="width:39%;" />
-          </div>
-          <div class="o3">1346079.00</div>
+          <div class="o3">{{ item.val }}.00</div>
         </div>
       </div>
     </div>
@@ -144,8 +93,64 @@
 </template>
 
 <script>
+import xlsx from 'xlsx';
+import axios from 'axios';
+
 export default {
   name: 'Demo1',
+  data() {
+    return {
+      list: [],
+    };
+  },
+  mounted() {
+    this.ReadExcel();
+  },
+  methods: {
+    ReadExcel() {
+      axios.get('/test.xls', { responseType: 'blob' }).then((res) => {
+        const fileReader = new FileReader();
+        fileReader.onload = (ev) => {
+          try {
+            const data = ev.target.result;
+            const XLSX = xlsx;
+            const workbook = XLSX.read(data, { type: 'binary', cellDates: true });
+            const wsname = workbook.SheetNames[2]; // 取第一张表，wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+            const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); // 生成json表格内容，wb.Sheets[Sheet名]获取第一个Sheet的数据
+            const excellist = []; // 清空接收数据
+            // 编辑数据
+            for (let i = 0; i < ws.length; i++) {
+              excellist.push(ws[i]);
+            }
+            let day = new Date().getDay();
+            day === 0 ? day = 6 : day -= 1;
+            let max = 0;
+            Object.keys(excellist[0]).forEach((key) => {
+              max = Math.max(excellist[0][key], max);
+            });
+            console.log('max', max);
+            while (this.list.length < 7) {
+              switch (day) {
+                case 1: this.list.push({ key: '周一', val: excellist[0].mon, width: ((excellist[0].mon / max) * 100) }); break;
+                case 2: this.list.push({ key: '周二', val: excellist[0].tus, width: ((excellist[0].tus / max) * 100) }); break;
+                case 3: this.list.push({ key: '周三', val: excellist[0].wed, width: ((excellist[0].wed / max) * 100) }); break;
+                case 4: this.list.push({ key: '周四', val: excellist[0].thu, width: ((excellist[0].thu / max) * 100) }); break;
+                case 5: this.list.push({ key: '周五', val: excellist[0].fri, width: ((excellist[0].fri / max) * 100) }); break;
+                case 6: this.list.push({ key: '周六', val: excellist[0].sat, width: ((excellist[0].sat / max) * 100) }); break;
+                default: this.list.push({ key: '周日', val: excellist[0].sun, width: ((excellist[0].sun / max) * 100) }); break;
+              }
+              day++;
+              if (day === 7) day = 0;
+            }
+            console.log('list', this.list);
+          } catch {
+            return console.warn('读取失败 3');
+          }
+        };
+        fileReader.readAsBinaryString(res.data);
+      });
+    },
+  },
 };
 </script>
 
