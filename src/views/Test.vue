@@ -14,6 +14,7 @@
           <span class="s3">字段3</span>
           <span class="s4">字段4</span>
           <span class="s5">字段5</span>
+          <span class="s6">操作</span>
         </div>
         <div
           class="td"
@@ -25,6 +26,14 @@
           <span class="s3">{{ item.text }}</span>
           <span class="s4">{{ item.desc }}</span>
           <span class="s5">{{ item.date }}</span>
+          <span class="s6">
+            <a
+              v-show="idx !== 0"
+              @click="move('up', idx)">上移</a>
+            <a
+              v-show="idx !== list.length - 1"
+              @click="move('down', idx)">下移</a>
+          </span>
         </div>
       </div>
   </div>
@@ -58,6 +67,20 @@ export default {
     };
   },
   methods: {
+    move(pos, index) {
+      let temp;
+      if (pos === 'up') {
+        temp = this.list[index - 1];
+        this.$set(this.list, index - 1, this.list[index]);
+        this.$set(this.list, index, temp);
+      }
+      if (pos === 'down') {
+        temp = this.list[index + 1];
+        this.$set(this.list, index + 1, this.list[index]);
+        this.$set(this.list, index, temp);
+      }
+      this.list.forEach((o, idx) => { o.idx = idx + 1; });
+    },
     // importExcel(e) {
     //   const files = e.target.files;
     //   console.log(files);
@@ -94,7 +117,7 @@ export default {
   height: 100%;
   background: #fff;
   .temp {
-    width: 1000px;
+    width: 1200px;
     display: flex;
     position: relative;
     margin: 100px auto 0;
@@ -104,15 +127,26 @@ export default {
       display: flex;
       background: #fff;
       position: relative;
+      box-sizing: border-box;
       border: solid 1px #ccc;
       span {
-        width: 20%;
+        width: 200px;
         height: 40px;
         display: flex;
         align-items: center;
+        box-sizing: border-box;
         justify-content: center;
         border-right: solid 1px #ccc;
         &:last-child { border: 0; }
+        a {
+          width: 50%;
+          height: 100%;
+          display: flex;
+          cursor: pointer;
+          align-items: center;
+          justify-content: center;
+          &:hover { color: #f00; }
+        }
       }
     }
     .td:hover {
