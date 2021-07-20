@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import './utils/create.js';
 import './styles/main.less';
 
 Vue.config.productionTip = false;
