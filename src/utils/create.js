@@ -36,8 +36,9 @@ Vue.directive('drag', (el, obj) => {
           list.unshift(item);
         } else {
           // 3.插入中间位置
+          // TODO 优化                                             
           list.splice(obj.value.idx, 1);
-          let now = Math.floor(top / 23) - 1;
+          let now = Math.floor(top / childH);
           if (now > 0) now -= 1;
           const arr1 = list.slice(0, now);
           const arr2 = list.slice(now, list.length);
