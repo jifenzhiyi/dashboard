@@ -4,7 +4,6 @@ Vue.directive('drag', (el, obj) => {
   const odiv = el;
   odiv.onmousedown = (ev) => {
     let isMove = false;
-    el.style.zIndex = 10;
     const temp = document.getElementById('temp');
     const list = obj.value.list; // 获取当前列表
     const childW = temp.children[0].children[0].clientWidth;
@@ -12,6 +11,7 @@ Vue.directive('drag', (el, obj) => {
     const disY = childH * (obj.value.idx + 1);
     const disX = ev.layerX;
     if (disX > childW * 5) return;
+    el.style.zIndex = 10;
     el.style.cursor = 'pointer';
     odiv.style.top = `${disY}px`;
     el.style.position = 'absolute';
@@ -38,8 +38,8 @@ Vue.directive('drag', (el, obj) => {
           // 3.插入中间位置
           // TODO 优化                                             
           list.splice(obj.value.idx, 1);
-          let now = Math.floor(top / childH);
-          if (now > 0) now -= 1;
+          const now = Math.floor(top / childH);
+          // if (now > 0) now -= 1;
           const arr1 = list.slice(0, now);
           const arr2 = list.slice(now, list.length);
           const newList = [...arr1, item, ...arr2];
